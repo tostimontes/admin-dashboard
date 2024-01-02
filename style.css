@@ -1,14 +1,110 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 :root {
-    font-size: 62.5%;
+  font-size: 62.5%;
+  --some-blue-color: #53a1eb;
+}
+
+html {
+  width: 100%;
+  height: 100%;
 }
 
 body {
-    font-size: 1.6rem;
-    font-family: 'Poppins', sans-serif;
+  font-size: 1.6rem;
+  font-family: "Poppins", sans-serif;
+  width: 100%;
+  height: 100%;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template:
+    "sidebar header header header"
+    "sidebar main main main"
+    "sidebar main main main"
+    "sidebar main main main"
+    "sidebar main main main";
+}
+
+.sidebar {
+  height: 100%;
+  /*TODO: guess grid width responsive */
+  background-color: var(--some-blue-color);
+  grid-area: sidebar;
+}
+
+.sidebar_grid {
+  height: 70%;
+  display: grid;
+  grid-template: 6rem repeat(11, 1fr) / 6rem 1fr;
+  padding: 2rem;
+  color: white;
+  align-items: center;
+  > .dash_icon {
+    display: flex;
+    align-items: center;
+    padding: 0 1.7rem;
+    aspect-ratio: 1 / 1;
+    /* width: 0.6rem; */
+    > svg path {
+      fill: white;
+    }
+  }
+}
+
+.dashboard_logo {
+  display: grid;
+  padding: 1.4rem;
+  width: 100%;
+  height: 100%;
+  grid-template:
+    "a b"
+    "a d"
+    "c d";
+  gap: 0.3rem;
+}
+
+.dashboard_text {
+  font-size: 2.4rem;
+}
+
+.logo_tiles {
+  background-color: white;
+}
+
+.tileA {
+  grid-area: a;
+}
+
+.tileB {
+  grid-area: b;
+}
+
+.tileC {
+  grid-area: c;
+}
+
+.tileD {
+  grid-area: d;
+}
+
+.dash_text {
+  font-size: 1.8rem;
+}
+
+.header {
+  background-color: white;
+  grid-area: header;
+}
+
+.main {
+  background-color: lightgray;
+  grid-area: main;
 }

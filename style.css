@@ -7,6 +7,7 @@
 :root {
   font-size: 62.5%;
   --some-blue-color: #53a1eb;
+  --some-grey-color: #e3e3e3;
 }
 
 html {
@@ -26,16 +27,16 @@ body {
   height: 100%;
   display: grid;
   grid-template:
-    "sidebar header header header"
+    "sidebar header header header" 18rem
     "sidebar main main main"
     "sidebar main main main"
     "sidebar main main main"
-    "sidebar main main main";
+    "sidebar main main main"
+    / 1fr 2fr 2fr 1fr;
 }
 
 .sidebar {
   height: 100%;
-  /*TODO: guess grid width responsive */
   background-color: var(--some-blue-color);
   grid-area: sidebar;
 }
@@ -102,9 +103,219 @@ body {
 .header {
   background-color: white;
   grid-area: header;
+  display: grid;
+  grid:
+    "search profile" 40%
+    "welcome actions" 60%
+    / 65% 35%;
+  padding: 1.5rem 5.5rem;
+  align-items: center;
+}
+
+.search {
+  grid-area: search;
+  display: grid;
+  grid: "search_icon search_bar" / 3.4rem 1fr;
+  align-items: center;
+}
+
+.search_icon {
+  grid-area: search_icon;
+  display: flex;
+  align-items: center;
+  padding: 0.6rem 0.6rem 0.6rem 0;
+}
+
+.search_bar {
+  width: 100%;
+  height: 3.4rem;
+  border-radius: 1.5rem;
+  border: 0px;
+  padding: 1rem;
+  font-size: 1.8rem;
+  outline: none;
+  text-decoration: none;
+  background-color: var(--some-grey-color);
+}
+
+.profile {
+  width: 100%;
+  height: 100%;
+  /* margin-left: auto; */
+  grid-area: profile;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  > .alert_icon,
+  .profile_icon {
+    width: 3.4rem;
+    height: 3.4rem;
+    padding: 0.6rem;
+    display: flex;
+    align-items: center;
+  }
+  > .profile_text {
+    width: fit-content;
+  }
+}
+
+.header_welcome {
+  grid-area: welcome;
+  height: 100%;
+  display: grid;
+  grid:
+    "icon welcome_message" 1fr
+    "icon welcome_message" 1fr
+    / 5.4rem 1fr;
+  align-items: center;
+  > .welcome_icon {
+    grid-area: icon;
+    display: flex;
+    align-items: center;
+    padding: 0.6rem 0.6rem 0.6rem 0;
+  }
+  > .welcome_message {
+    grid-area: welcome_message;
+    > p {
+      font-size: 1.1rem;
+    }
+    > .welcome_username {
+      font-size: 1.9rem;
+    }
+  }
+}
+
+.header_actions {
+  grid-area: actions;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 3rem;
+  margin-left: 1rem;
+  > .action_buttons {
+    background-color: var(--some-blue-color);
+    flex: 0 5 1rem;
+    color: white;
+    font-size: 1.6rem;
+    padding: 1rem 2rem;
+    outline: none;
+    border: 0px;
+    border-radius: 2rem;
+    cursor: pointer;
+    font-weight: bold;
+  }
 }
 
 .main {
-  background-color: lightgray;
+  background-color: var(--some-grey-color);
   grid-area: main;
+  display: grid;
+  grid:
+    "cards_title announcements_title" 4rem
+    "cards announcements" 1fr
+    "cards trending_title" 4rem
+    "cards trending" 1fr
+    / 2fr 1fr;
+  padding: 2.5rem 5.5rem;
+  gap: 3rem;
+  > .content {
+    grid-area: cards;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(27rem, 1fr));
+    gap: 3.5rem;
+    > .content_card {
+      background-color: white;
+      border-radius: 1.5rem;
+      padding: 1.7rem 1.6rem;
+      border-left: 1.5rem solid rgb(255, 200, 0);
+      display: grid;
+      grid:
+        "card_title" 2rem
+        "card_text" fit-content
+        "card_actions" 2rem
+        / 1fr;
+      > .card_title {
+        font-size: 1.8rem;
+        margin-bottom: 0.7rem;
+      }
+      > .card_text {
+        font-size: 1.3rem;
+        color: #6b6b6b;
+      }
+      > .card_actions {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        gap: 2rem;
+        > button {
+          background-color: white;
+          outline: none;
+          border: 0;
+          height: 2rem;
+          width: 2rem;
+        }
+      }
+    }
+  }
+}
+
+.announcements_title {
+  grid-area: announcements_title;
+}
+
+.announcements {
+  grid-area: announcements;
+  display: grid;
+  grid: auto-flow / 1fr;
+  gap: 2rem;
+  background-color: white;
+  border-radius: 1.5rem;
+  padding: 3rem;
+  & p {
+    font-size: 1.4rem;
+    color: #6b6b6b;
+    padding-bottom: 1.5rem;
+    &::after {
+      margin-top: 1.5rem;
+      content: "";
+      width: 100%;
+      height: 2px;
+      display: block;
+      background-color: var(--some-grey-color);
+    }
+  }
+}
+
+.trending_title {
+  grid-area: trending_title;
+}
+
+.trending {
+  display: grid;
+  grid: auto-flow / 1fr;
+  background-color: white;
+  padding: 2rem;
+  gap: 2rem;
+  border-radius: 1.5rem;
+  > .trending_user {
+    display: grid;
+    grid:
+      "avatar username" 1fr
+      "avatar name" 1fr
+      / 1fr 4fr;
+    > .trending_user_avatar {
+      grid-area: avatar;
+      background-color: #6b6b6b;
+      border-radius: 50%;
+      height: 4rem;
+      width: 4rem;
+      align-self: center;
+    }
+    > .trending_user_username {
+      grid-area: username;
+    }
+    > .trending_user_name {
+      grid-area: name;
+    }
+  }
 }
